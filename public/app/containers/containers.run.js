@@ -7,6 +7,10 @@
 	function config(Restangular) {
 		// Container collection operations
 		Restangular.extendCollection('containers', function (collection) {
+			collection.search = collection.getList;
+			collection.byId = function (id) {
+				return Restangular.one(this.route, id);
+			};
 			collection.start = function () {
 				return this.all('startAll').post();
 			};

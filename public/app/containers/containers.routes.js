@@ -16,10 +16,9 @@
 			templateUrl: 'app/containers/containers.list.html',
 			controller: 'ContainersCtrl',
 			resolve: {
-				/*containers: ['Restangular', function(Restangular) {
-					console.log('Resolving containers');
-					return Restangular.all('containers').getList();
-				}]*/
+				Containers: ['Restangular', function(Restangular) {
+					return Restangular.all('containers');
+				}]
 			}
 		});
 	}

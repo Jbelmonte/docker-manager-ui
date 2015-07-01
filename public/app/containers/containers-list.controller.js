@@ -3,10 +3,9 @@
 		.module('docker-manager-ui.containers')
 		.controller('ContainersCtrl', ContainersCtrl);
 	
-	ContainersCtrl.$inject = ['$scope', '$filter', 'ngTableParams', 'Restangular'];
-	function ContainersCtrl (  $scope,   $filter,   ngTableParams,   Restangular) {
+	ContainersCtrl.$inject = ['$scope', '$filter', 'ngTableParams', 'Containers'];
+	function ContainersCtrl (  $scope,   $filter,   ngTableParams,   Containers) {
 		var vm = $scope;
-		var containerListApi = Restangular.all('containers');
 		
 		//var _searching = undefined;
 		
@@ -81,16 +80,15 @@
 		 * Functions
 		 */
 		 function search() {
-			containerListApi.getList(vm.params)
-							.then(function (containers) {
-								vm.containers = containers;
-								_reloadGrid();
-							});
+			Containers.search(vm.params)
+						.then(function (containers) {
+							vm.containers = containers;
+							_reloadGrid();
+						});
 		 }
 		 function startAllContainers() {
 			 console.log('Start all containers');
-			 Restangular.all('containers')
-			 			.start()
+			 Containers.start()
 						.then(function (data) {
 							console.log('Start all containers response', arguments);
 							search();
@@ -100,8 +98,7 @@
 		 }
 		 function stopAllContainers() {
 			 console.log('Stop all containers');
-			 Restangular.all('containers')
-			 			.stop()
+			 Containers.stop()
 						.then(function (data) {
 							console.log('Stop all containers response', arguments);
 							search();
@@ -111,7 +108,7 @@
 		 }
 		 function startContainer(cont) {
 			 console.log('Start container ', cont);
-			 Restangular.one('containers', cont.Id)
+			 Containers.byId(cont.Id)
 			 			.start()
 						.then(function (data) {
 							console.log('Start container response', arguments);
@@ -122,7 +119,7 @@
 		 }
 		 function stopContainer(cont) {
 			 console.log('Stop container', cont);
-			 Restangular.one('containers', cont.Id)
+			 Containers.byId(cont.Id)
 			 			.stop()
 						.then(function (data) {
 							console.log('Stop container response', arguments);
