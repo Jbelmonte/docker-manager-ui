@@ -3,11 +3,10 @@
 		.module('docker-manager-ui.containers')
 		.controller('ContainersCtrl', ContainersCtrl);
 	
-	ContainersCtrl.$inject = ['$scope', '$filter', 'ngTableParams', 'Containers'];
-	function ContainersCtrl (  $scope,   $filter,   ngTableParams,   Containers) {
+	ContainersCtrl.$inject = ['$scope', '$filter', '$q', 'ngTableParams', 'Containers'];
+	function ContainersCtrl (  $scope,   $filter,   $q,   NgTableParams,   Containers) {
 		var vm = $scope;
-		
-		//var _searching = undefined;
+		var _searching = undefined;
 		
 		/**
 		 * Publish scope
@@ -16,45 +15,24 @@
 		vm.containers = [];
 		vm.params = {
 			all: true,
-			limit: 100
+			//limit: 100
 		};
 		
 		// Table configuration
-		vm.tableParams = new ngTableParams({
+		vm.tableParams = new NgTableParams({
 			page: 1,
-			count: 10,
+			count: 2,
 			sorting: {
 				Image: 'asc'
 			}
 		}, {
 			total: 0,
 			getData: function ($defer, params) {
-				/*if (_searching) {
-					// Already searching
-					_searching.then($defer.resolve, $defer.reject);
-					return;
-				}*/
-				
-				// Habemus data
-				console.log('Looking for containers at page (index %d, count %d) with sort', params.page(), params.count(), params.orderBy());
-				var data = vm.containers;
-
-				// Update total count
-				params.total(data.length);
-				
-				// Sort
-				var orderedData = params.sorting() ?
-                    $filter('orderBy')(data, params.orderBy()) :
-                    data;
-					
-				// Page
-				if (orderedData.length > 0) {
-					var start = (params.page() - 1) * params.count(),
-						end = Math.min(orderedData.length, params.page() * params.count());
-					orderedData = orderedData.slice(start, end);
-				}
-				
-				$defer.resolve(orderedData);
+				_searching
+					.then(function (data) {
+						return _pageData(data, params);
+					})
+					.then($defer.resolve, $defer.reject);
 			}
 		});
 		
@@ -66,13 +44,7 @@
 		vm.stopContainer = stopContainer;
 		vm.isStoppable = isStoppable;
 		vm.isStartable = isStartable;
-		
-		// Watchs
-		/*vm.$watch('params', function (newValue, oldValue) {
-			console.log('Updating ngTable limit with form limit');
-			//vm.tableParams.limit(vm.params.limit);
-		});*/
-		
+
 		// Load
 		search();
 		
@@ -80,53 +52,35 @@
 		 * Functions
 		 */
 		 function search() {
-			Containers.search(vm.params)
-						.then(function (containers) {
-							vm.containers = containers;
-							_reloadGrid();
-						});
+			 console.log('Search containers');
+			 _searching = Containers.search(vm.params)
+									.then(_saveData)
+									.then(_reloadGrid);
+			return _searching;
 		 }
 		 function startAllContainers() {
 			 console.log('Start all containers');
-			 Containers.start()
-						.then(function (data) {
-							console.log('Start all containers response', arguments);
-							search();
-						}, function (response) {
-							console.log("Start all containers: Error with status code", response.status);
-						});
+			 return Containers
+			 			.start()
+						.then(search, console.error);
 		 }
 		 function stopAllContainers() {
 			 console.log('Stop all containers');
-			 Containers.stop()
-						.then(function (data) {
-							console.log('Stop all containers response', arguments);
-							search();
-						}, function (response) {
-							console.log("Stop all containers: Error with status code", response.status);
-						});
+			 return Containers
+			 			.stop()
+						.then(search, console.error);
 		 }
 		 function startContainer(cont) {
 			 console.log('Start container ', cont);
-			 Containers.byId(cont.Id)
+			 return Containers.byId(cont.Id)
 			 			.start()
-						.then(function (data) {
-							console.log('Start container response', arguments);
-							search();
-						}, function (response) {
-							console.log("Start container: Error with status code", response.status);
-						});
+						.then(search, console.error);
 		 }
 		 function stopContainer(cont) {
 			 console.log('Stop container', cont);
-			 Containers.byId(cont.Id)
+			 return Containers.byId(cont.Id)
 			 			.stop()
-						.then(function (data) {
-							console.log('Stop container response', arguments);
-							search();
-						}, function (response) {
-							console.log("Stop container: Error with status code", response.status);
-						});
+						.then(search, console.error);
 		 }
  		 function isStoppable(cont) {
 			 var status = $filter('cntStatus')(cont.Status);
@@ -138,8 +92,38 @@
 		 }
 		 
 		 // Private functions
-		 function _reloadGrid() {
-			 vm.tableParams.reload();
+		 function _pageData(data, tableParams) {
+			 console.log('_pageData', data);
+			// Update total count
+			data = data || [];
+			tableParams.total(data.length);
+			
+			// Sort
+			var orderedData = tableParams.sorting() ?
+				$filter('orderBy')(data, tableParams.orderBy()) :
+				data;
+			
+			// Page
+			if (orderedData.length > 0) {
+				var start = (tableParams.page() - 1) * tableParams.count(),
+					end = Math.min(orderedData.length, tableParams.page() * tableParams.count());
+				orderedData = orderedData.slice(start, end);
+			}
+			
+			return orderedData;
 		 }
+		 
+		 function _saveData(data) {
+			 console.log('Storing search results. Total: ', data.length);
+			 vm.containers = data;
+			 return data;
+		 }
+		 
+		 function _reloadGrid(data) {
+			 console.log('Reload grid with incomming data');
+			 vm.tableParams.reload();
+			 return data;
+		 }
+		 
 	}
 })();
