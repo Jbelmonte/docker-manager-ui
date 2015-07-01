@@ -1,0 +1,15 @@
+<!-- navbar -->
+<div data-ng-include=" 'app/partials/blocks/header.html' " class="app-header navbar"></div>
+<!-- / navbar -->
+
+<!-- menu -->
+<div data-ng-include=" 'app/partials/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}"></div>
+<!-- / menu -->
+
+<!-- content -->
+<div class="fade-in-up container" data-ui-view></div>
+<!-- /content -->
+
+<!-- footer -->
+<div data-ng-include=" 'app/partials/blocks/footer.html' "></div>
+<!-- / footer -->

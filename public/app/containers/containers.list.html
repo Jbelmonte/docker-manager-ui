@@ -1,0 +1,52 @@
+<div class="row">
+    <h2>List of Docker containers</h2>
+</div>
+
+<div class="row">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="limit">Limit</label>
+            <input type="number" class="form-control" id="limit" placeholder="10" data-ng-model="params.limit">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" data-ng-model="params.all">All</label>
+        </div>
+        <button type="button" class="btn btn-default" data-ng-click="search()">Search</button>
+    </form>
+</div>
+
+<div class="row">
+    <table ng-table="tableParams" class="table ng-table-responsive">
+        <tr ng-repeat="cont in $data">
+            <td data-title="'Id'">
+                <span title="{{cont.Id}}">{{cont.Id | dmTruncate:10}}</span>
+            </td>
+            <td data-title="'Image'" sortable="'Image'">
+                <code>{{cont.Image}}</code>
+            </td>
+            <td data-title="'Command'">
+                <span title="{{cont.Command}}">
+                    <samp>{{cont.Command | dmTruncate:40}}</samp>
+                </span>
+            </td>
+            <td data-title="'Created'" sortable="'Created'">{{cont.Created * 1000 | amCalendar}}</td>
+            <td data-title="'Name'">
+                <span class="label label-default" ng-repeat="name in cont.Names">{{name}}</span>
+            </td>
+            <td data-title="'Status'">
+                <span class="label label-{{cont.Status | cntStatusClass}}">{{cont.Status}}</span>
+            </td>
+            <!--td data-title="'Ports'">
+                <span data-ng-repeat="port in cont.Ports">{{port}}</span>
+            </td-->
+            <!--td data-title="'SizeRw'">{{cont.SizeRw}}</td-->
+            <td data-title="'Actions'">
+                <button class="btn btn-xs btn-success" data-ng-if="isStartable(cont)" data-ng-click="startContainer(cont)">Start</button>
+                <button class="btn btn-xs btn-danger" data-ng-if="isStoppable(cont)" data-ng-click="stopContainer(cont)">Stop</button>
+            </td>
+        </tr>
+    </table>
+    <button type="button" class="btn btn-default" ng-click="search()">Refresh</button>
+    <button type="button" class="btn btn-success" ng-click="startAllContainers()">Start all</button>
+    <button type="button" class="btn btn-danger" ng-click="stopAllContainers()">Stop all</button>
+</div>
