@@ -3,12 +3,14 @@
 		.module('docker-manager-ui')
 		.config(config);
 	
-	config.$inject = ['$stateProvider', '$urlRouterProvider'];
-	function config ($stateProvider, $urlRouterProvider) {
+	config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+	function config (  $stateProvider,   $urlRouterProvider,   $locationProvider) {
 		console.log('Configuring docker-manager-ui module');
 		
 		// Configure routes
 		$urlRouterProvider.otherwise('/');
+		$locationProvider.html5Mode(true).hashPrefix('!');
+		
 		$stateProvider
 		.state('app', {
 			abstract: true,

@@ -25,8 +25,11 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
-app.use('/', routes);
+//app.use('/', routes);
 app.use('/docker-api', docker_api);
+app.all('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
