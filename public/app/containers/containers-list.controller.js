@@ -3,8 +3,8 @@
 		.module('docker-manager-ui.containers')
 		.controller('ContainersCtrl', ContainersCtrl);
 
-	ContainersCtrl.$inject = ['$scope', '$filter', '$q', 'ngTableParams', 'Containers'];
-	function ContainersCtrl($scope, $filter, $q, NgTableParams, Containers) {
+	ContainersCtrl.$inject = ['$scope', '$filter', '$q', 'ngTableParams', 'Containers', 'logger'];
+	function ContainersCtrl($scope, $filter, $q, NgTableParams, Containers, logger) {
 		var vm = $scope;
 		var _searching = undefined;
 
@@ -18,7 +18,7 @@
 		 * Functions
 		 */
 		function search() {
-			console.log('Search containers');
+			logger.info('Search containers');
 			
 			/**
 			 * Init a search result promise, or reuse existing one.
