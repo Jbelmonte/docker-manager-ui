@@ -5,7 +5,7 @@
 	
 	config.$inject = ['RestangularProvider'];
 	function config (RestangularProvider) {
-		var baseUrl = 'http://localhost:3000/docker-api';
+		var baseUrl = '/docker-api';
 		console.log('Configurint REST endpoints with base URL', baseUrl);
 		
 		// Configure REST client
