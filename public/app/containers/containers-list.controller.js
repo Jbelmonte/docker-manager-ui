@@ -19,11 +19,20 @@
 		 */
 		function search() {
 			console.log('Search containers');
-			_searching = Containers
-							.search(vm.params)
-							.then(_saveData)
-							.then(_reloadGrid);
-			return _searching;
+			
+			/**
+			 * Init a search result promise, or reuse existing one.
+			 * 
+			 * Promise _searching will be resolved later in _saveData function when valid
+			 * data is received.
+			 * This way we prevent a network error from break grid updates (sorting, paging, etc.).
+			 */
+			_searching = _searching || $q.defer();
+			
+			return Containers
+						.search(vm.params)
+						.then(_saveData)
+						.then(_reloadGrid);
 		}
 		function startAllContainers() {
 			console.log('Start all containers');
@@ -80,7 +89,14 @@
 				}, {
 					total: 0,
 					getData: function ($defer, params) {
-						_searching
+						console.log('Requesting data for grid.');
+						
+						/**
+						 * Reuse search promise not to perform a search each time
+						 * user pages or sorts data in grid.
+						 */
+						_searchPromise()
+							.promise
 							.then(function (data) {
 								return _pageData(data, params);
 							})
@@ -117,19 +133,46 @@
 				orderedData = orderedData.slice(start, end);
 			}
 
+			// Return paged data
 			return orderedData;
 		}
 
 		function _saveData(data) {
 			console.log('Storing search results. Total: ', data.length);
 			vm.containers = data;
+			
+			/**
+			 * Resolve searching promise.
+			 * 
+			 * Create a new promise now we have valid data.
+			 * Previous one gets replaced.
+			 */
+			_searchPromise(true).resolve(data);
+			
+			// Return data again for nested promises.
 			return data;
 		}
 
 		function _reloadGrid(data) {
 			console.log('Reload grid with incomming data');
+			
+			// Force a grid reload
 			vm.tableParams.reload();
+			
+			// Show first page
+			/*if (vm.tableParams.page() != 1) {
+				vm.tableParams.page(1);
+			}*/
+			
+			// Return data again for nested promises.
 			return data;
+		}
+		
+		function _searchPromise(newOne) {
+			if (newOne === true) {
+				_searching = $q.defer();
+			}
+			return _searching;
 		}
 
 	}
