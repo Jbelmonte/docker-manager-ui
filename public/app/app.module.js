@@ -12,7 +12,7 @@
 			'dialogs.default-translations',
 			
 			// App modules
-			'app.common',
+			'app.core',
 			'docker-manager-ui.common.directives',
 			'docker-manager-ui.common.filters',
 			'docker-manager-ui.containers'

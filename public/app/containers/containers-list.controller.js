@@ -3,9 +3,14 @@
 		.module('docker-manager-ui.containers')
 		.controller('ContainersCtrl', ContainersCtrl);
 
-	ContainersCtrl.$inject = ['$scope', '$filter', '$q', 'ngTableParams', 'Containers', 'logger', 'dialogs'];
-	function ContainersCtrl($scope, $filter, $q, NgTableParams, Containers, logger, $dialogs) {
+	ContainersCtrl.$inject = ['$scope', 'ngTableParams', 'Containers', 'appCommons'];
+	function ContainersCtrl(   $scope,   NgTableParams,   Containers,   commons) {
 		var vm = $scope;
+		var logger = commons.logger,
+			dialogs = commons.dialogs,
+			$q = commons.$q,
+			$filter = commons.$filter;
+		
 		var _searching = undefined;
 
 		// Initialize scope
@@ -35,35 +40,52 @@
 						.then(_reloadGrid);
 		}
 		function startAllContainers() {
-			console.log('Start all containers');
+			logger.log('Start all containers');
 			return Containers
 						.start()
-						.then(search, console.error);
+						.then(search, logger.error);
 		}
 		function stopAllContainers() {
-			console.log('Stop all containers');
 			var defer = $q.defer();
-			$dialogs.confirm('Please Confirm','Is this awesome or what?')
+			dialogs.confirm('Please confirm','Are you sure you want to stop all containers?')
 					.result
 					.then(function () {
+						logger.info('Stopping all containers');
 						return Containers
 									.stop()
-									.then(search, console.error);
+									.then(search, logger.error);
 					}, function () {
+						logger.log('Uh! Lucky me!');
 					});
 			return defer.promise;
 		}
 		function startContainer(cont) {
-			console.log('Start container ', cont);
-			return Containers.byId(cont.Id)
-						.start()
-						.then(search, console.error);
+			var defer = $q.defer();
+			dialogs.confirm('Please confirm','Are you sure you want to start this container?')
+					.result
+					.then(function () {
+						logger.info('Start container ', cont);
+						return Containers.byId(cont.Id)
+									.start()
+									.then(search, logger.error);
+					}, function () {
+						logger.log('Uh! Lucky me!');
+					});
+			return defer.promise;
 		}
 		function stopContainer(cont) {
-			console.log('Stop container', cont);
-			return Containers.byId(cont.Id)
-						.stop()
-						.then(search, console.error);
+			var defer = $q.defer();
+			dialogs.confirm('Please confirm','Are you sure you want to stop this container?')
+					.result
+					.then(function () {
+						logger.log('Stop container', cont);
+						return Containers.byId(cont.Id)
+									.stop()
+									.then(search, logger.error);
+					}, function () {
+						logger.log('Uh! Lucky me!');
+					});
+			return defer.promise;
 		}
 		function isStoppable(cont) {
 			var status = $filter('cntStatus')(cont.Status);
@@ -96,7 +118,7 @@
 				}, {
 					total: 0,
 					getData: function ($defer, params) {
-						console.log('Requesting data for grid.');
+						logger.log('Requesting data for grid.');
 						
 						/**
 						 * Reuse search promise not to perform a search each time
@@ -123,7 +145,7 @@
 		}
 
 		function _pageData(data, tableParams) {
-			console.log('Return page (index %d, count %d) from data', tableParams.page(), tableParams.count());
+			logger.log('Return page (index %d, count %d) from data', tableParams.page(), tableParams.count());
 			// Update total count
 			data = data || [];
 			tableParams.total(data.length);
@@ -145,7 +167,7 @@
 		}
 
 		function _saveData(data) {
-			console.log('Storing search results. Total: ', data.length);
+			logger.log('Storing search results (%d elements)', data.length);
 			vm.containers = data;
 			
 			/**
@@ -161,7 +183,7 @@
 		}
 
 		function _reloadGrid(data) {
-			console.log('Reload grid with incomming data');
+			logger.log('Reload grid with incomming data');
 			
 			// Force a grid reload
 			vm.tableParams.reload();

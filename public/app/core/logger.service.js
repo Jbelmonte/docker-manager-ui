@@ -1,18 +1,18 @@
 (function () {
 	angular
-		.module('app.common', [])
+		.module('app.core')
 		.provider('logger', loggerProvider);
 		
 	
 	function loggerProvider() {
 		var options = {
-			console: true,
+			$log: true,
 		};
 		return {
 			config: function (opts) {
 				angular.extend(options, opts);
 			},
-			$get: ['toastr', function (toastr) {
+			$get: ['$log', 'toastr', function ($log, toastr) {
 				var service = {
 					log: log,
 					info: info,
@@ -23,20 +23,30 @@
 		
 				////// Functions
 				function log (msg, title) {
-					console.log('LOG:   ', msg);
-					//toastr.info(msg, title);
+					_logWithPreffix($log.log, 'LOG:   ', arguments);
 				}
 				function info (msg, title) {
-					console.log('INFO:  ', msg);
+					_logWithPreffix($log.log, 'INFO:  ', arguments);
 					toastr.info(msg, title);
 				}
 				function warn (msg, title) {
-					console.warn('WARN:  ', msg);
+					_logWithPreffix($log.warn, 'WARN:  ', arguments);
 					toastr.warning(msg, title);
 				}
 				function error (msg, title) {
-					console.error('ERROR: ', msg);
+					_logWithPreffix($log.error, 'ERROR: ', arguments);
 					toastr.error(msg, title);
+				}
+				
+				function _logWithPreffix(logFn, preffix, argArray) {
+					var args = Array.prototype.slice.call(argArray);
+					if (args.length == 0) {
+						args.push('');
+					}
+					args[0] = preffix + ' ' + args[0];
+					
+					// Log
+					logFn.apply(null, args);
 				}
 			}]	
 		};
