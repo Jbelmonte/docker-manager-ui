@@ -8,6 +8,8 @@
 			'angularMoment',
 			'ngAnimate',
 			'toastr',
+			'dialogs.main',
+			'dialogs.default-translations',
 			
 			// App modules
 			'app.common',

@@ -3,8 +3,8 @@
 		.module('docker-manager-ui.containers')
 		.controller('ContainersCtrl', ContainersCtrl);
 
-	ContainersCtrl.$inject = ['$scope', '$filter', '$q', 'ngTableParams', 'Containers', 'logger'];
-	function ContainersCtrl($scope, $filter, $q, NgTableParams, Containers, logger) {
+	ContainersCtrl.$inject = ['$scope', '$filter', '$q', 'ngTableParams', 'Containers', 'logger', 'dialogs'];
+	function ContainersCtrl($scope, $filter, $q, NgTableParams, Containers, logger, $dialogs) {
 		var vm = $scope;
 		var _searching = undefined;
 
@@ -42,9 +42,16 @@
 		}
 		function stopAllContainers() {
 			console.log('Stop all containers');
-			return Containers
-						.stop()
-						.then(search, console.error);
+			var defer = $q.defer();
+			$dialogs.confirm('Please Confirm','Is this awesome or what?')
+					.result
+					.then(function () {
+						return Containers
+									.stop()
+									.then(search, console.error);
+					}, function () {
+					});
+			return defer.promise;
 		}
 		function startContainer(cont) {
 			console.log('Start container ', cont);
