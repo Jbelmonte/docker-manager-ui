@@ -36,7 +36,7 @@
 			
 			return Containers
 						.search(vm.params)
-						.then(_saveData)
+						.then(_saveData, logger.error)
 						.then(_reloadGrid);
 		}
 		function startAllContainers() {
