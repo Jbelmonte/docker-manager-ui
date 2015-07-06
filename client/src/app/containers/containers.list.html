@@ -1,0 +1,76 @@
+<div class="row">
+    <h2>Docker containers</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>Filter containers</h3>
+        <form class="form">
+            <div class="radio">
+              <label>
+                <input type="radio" data-ng-model="params.all" id="containers-all" value="true">
+                All containers
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" data-ng-model="params.all" id="containers-up" value="false">
+                Only running (up) containers
+              </label>
+            </div>
+            <!--div class="checkbox">
+                <label><input type="checkbox" data-ng-model="params.size">Request container size</label>
+            </div-->
+            <button type="button" class="btn btn-primary" data-ng-click="search()">Search</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h3>Status</h3>
+        <canvas class="chart-base" chart-type="'PolarArea'" legend="true"
+                data="chart.data" labels="chart.labels" colours="chart.colours" options="chart.options"></canvas>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>List of Docker containers</h3>
+        <table ng-table="tableParams" class="table table-hover table-condensed ng-table-responsive">
+            <tr ng-repeat="cont in $data">
+                <td data-title="'Id'">
+                    <span class="small" title="{{cont.Id}}">{{cont.Id | dmTruncate:20}}</span>
+                </td>
+                <td data-title="'Image'" sortable="'Image'">
+                    <code class="small">{{cont.Image}}</code>
+                </td>
+                <td data-title="'Command'">
+                    <span class="small" title="{{cont.Command}}">
+                        <samp>{{cont.Command | dmTruncate:40}}</samp>
+                    </span>
+                </td>
+                <td data-title="'Created'" sortable="'Created'">
+                    <span class="small">{{cont.Created * 1000 | amCalendar}}</span>
+                </td>
+                <td data-title="'Status'">
+                    <p class="small text-{{cont.Status | cntStatusClass}}">{{cont.Status}}</p>
+                </td>
+                <!--td data-title="'Name'">
+                    <span class="small label label-default" ng-repeat="name in cont.Names">{{name}}</span>
+                </td-->
+                <!--td data-title="'Ports'">
+                    <span data-ng-repeat="port in cont.Ports">{{port}}</span>
+                </td-->
+                <!--td data-title="'SizeRw'">
+                    <span data-ng-if="cont.SizeRw != undefined">{{cont.SizeRw}}</span>
+                    <p data-ng-if="cont.SizeRw == undefined" class="small text-warning">Search again to request container sizes</p>
+                </td-->
+                <td data-title="'Actions'">
+                    <button class="btn btn-xs btn-success" data-ng-if="isStartable(cont)" data-ng-click="startContainer(cont)">Start</button>
+                    <button class="btn btn-xs btn-danger" data-ng-if="isStoppable(cont)" data-ng-click="stopContainer(cont)">Stop</button>
+                </td>
+            </tr>
+        </table>
+        <button type="button" class="btn btn-default" ng-click="search()">Refresh</button>
+        <button type="button" class="btn btn-success" ng-click="startAllContainers()">Start all</button>
+        <button type="button" class="btn btn-danger" ng-click="stopAllContainers()">Stop all</button>
+    </div>
+</div>

@@ -14,7 +14,7 @@ lib-cov
 coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
+client/.grunt
 
 # node-waf configuration
 .lock-wscript
@@ -24,9 +24,13 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-node_modules
-bower_components
-public/assets/javascripts
+client/node_modules
+client/src/bower_components
+client/.tmp
+client/dist
+
+server/node_modules
+server/dist
 
 # Debug log from npm
 npm-debug.log
