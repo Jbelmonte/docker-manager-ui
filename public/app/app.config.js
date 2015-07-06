@@ -1,19 +1,27 @@
 (function () {
 	angular
 		.module('docker-manager-ui')
-		.config(config);
+		.config(config)
+		.run(run);
 	
 	config.$inject = ['RestangularProvider', 'dialogsProvider', '$translateProvider', '$logProvider'];
 	function config (  RestangularProvider,   dialogsProvider,   $translateProvider,   $logProvider) {
-		// Configure logs
+		/**
+		 * Configure logs
+		 */
 		$logProvider.debugEnabled(false);
 		
-		// Configure REST client
+		/**
+		 * Configure REST client
+		 */
+		// Base URL
 		var baseUrl = '/docker-api';
 		console.log('Configurint REST endpoints with base URL', baseUrl);		
 		RestangularProvider.setBaseUrl(baseUrl);
 		
-		// Translations
+		/**
+		 * Translations
+		 */
 		$translateProvider.preferredLanguage('es');
 		
 		// Configure dialogs
@@ -21,5 +29,16 @@
 		dialogsProvider.useEscClose(false);
 		dialogsProvider.useCopy(false);
 		dialogsProvider.setSize('sm');
+	}
+	
+	run.$inject = ['Restangular', 'appCommons'];	
+	function run (  Restangular,   common) {
+		// Error interceptor
+		Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+			// Error not handler
+			common.logger.error('Server returned status code ' + response.status);
+			console.dir(response);
+			return true;
+		});
 	}
 })();
