@@ -104,14 +104,22 @@
 			// Already loaded containers
 			vm.containers = [];
 			vm.params = {
-				all: true,
+				all: 'true',
 				//limit: 100
+			};
+			
+			// Chart
+			vm.chart = {
+				data: [],
+				labels: ['Up', 'Exited'],
+				colours: ['#46BFBD', '#F7464A'],
+				options: { }
 			};
 			
 			// Table configuration
 			vm.tableParams = new NgTableParams({
 					page: 1,
-					count: 10,
+					count: 5,
 					sorting: {
 						Image: 'asc'
 					}
@@ -178,6 +186,8 @@
 			 */
 			_searchPromise(true).resolve(data);
 			
+			_updateChart(data);
+			
 			// Return data again for nested promises.
 			return data;
 		}
@@ -202,6 +212,28 @@
 				_searching = $q.defer();
 			}
 			return _searching;
+		}
+		
+		function _updateChart(data) {
+			logger.log('Refreshing chart');
+			var status = data.map(function (container) {
+									return container.Status;
+								})
+								.map($filter('cntStatus'))
+								.sort()
+			var charData = [];
+			for (var idl=0; idl<vm.chart.labels.length; idl++) {
+				var label = vm.chart.labels[idl];
+				var total = 0;
+				for (var idx=0; idx<status.length; idx++) {
+					if (status[idx] === label) {
+						total++;
+					}
+				}
+				charData.push(total);
+			};
+			vm.chart.data = charData;
+			return data;
 		}
 
 	}

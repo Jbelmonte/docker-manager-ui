@@ -10,6 +10,7 @@
 			'toastr',
 			'dialogs.main',
 			'dialogs.default-translations',
+			'chart.js',
 			
 			// App modules
 			'app.core',

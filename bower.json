@@ -24,7 +24,8 @@
     "angular-toastr": "~1.4.1",
     "angular-dialog-service": "~5.2.8",
     "angular-sanitize": "~1.4.1",
-    "angular-translate": "~2.7.2"
+    "angular-translate": "~2.7.2",
+    "angular-chart.js": "~0.7.2"
   },
   "resolutions": {
     "angular-bootstrap": "~0.13.0",
