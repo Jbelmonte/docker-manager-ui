@@ -18,9 +18,9 @@
                 Only running (up) containers
               </label>
             </div>
-            <div class="checkbox">
+            <!--div class="checkbox">
                 <label><input type="checkbox" data-ng-model="params.size">Request container size</label>
-            </div>
+            </div-->
             <button type="button" class="btn btn-primary" data-ng-click="search()">Search</button>
         </form>
     </div>
@@ -37,30 +37,32 @@
         <table ng-table="tableParams" class="table table-hover table-condensed ng-table-responsive">
             <tr ng-repeat="cont in $data">
                 <td data-title="'Id'">
-                    <span title="{{cont.Id}}">{{cont.Id | dmTruncate:10}}</span>
+                    <span class="small" title="{{cont.Id}}">{{cont.Id | dmTruncate:20}}</span>
                 </td>
                 <td data-title="'Image'" sortable="'Image'">
-                    <code>{{cont.Image}}</code>
+                    <code class="small">{{cont.Image}}</code>
                 </td>
                 <td data-title="'Command'">
-                    <span title="{{cont.Command}}">
+                    <span class="small" title="{{cont.Command}}">
                         <samp>{{cont.Command | dmTruncate:40}}</samp>
                     </span>
                 </td>
-                <td data-title="'Created'" sortable="'Created'">{{cont.Created * 1000 | amCalendar}}</td>
-                <td data-title="'Name'">
-                    <span class="label label-default" ng-repeat="name in cont.Names">{{name}}</span>
+                <td data-title="'Created'" sortable="'Created'">
+                    <span class="small">{{cont.Created * 1000 | amCalendar}}</span>
                 </td>
                 <td data-title="'Status'">
-                    <span class="label label-{{cont.Status | cntStatusClass}}">{{cont.Status}}</span>
+                    <p class="small text-{{cont.Status | cntStatusClass}}">{{cont.Status}}</p>
                 </td>
+                <!--td data-title="'Name'">
+                    <span class="small label label-default" ng-repeat="name in cont.Names">{{name}}</span>
+                </td-->
                 <!--td data-title="'Ports'">
                     <span data-ng-repeat="port in cont.Ports">{{port}}</span>
                 </td-->
-                <td data-title="'SizeRw'">
+                <!--td data-title="'SizeRw'">
                     <span data-ng-if="cont.SizeRw != undefined">{{cont.SizeRw}}</span>
                     <p data-ng-if="cont.SizeRw == undefined" class="small text-warning">Search again to request container sizes</p>
-                </td>
+                </td-->
                 <td data-title="'Actions'">
                     <button class="btn btn-xs btn-success" data-ng-if="isStartable(cont)" data-ng-click="startContainer(cont)">Start</button>
                     <button class="btn btn-xs btn-danger" data-ng-if="isStoppable(cont)" data-ng-click="stopContainer(cont)">Stop</button>

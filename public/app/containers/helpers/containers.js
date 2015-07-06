@@ -41,6 +41,7 @@
 		var status = _containerStatus(statusText);
 		switch(status) {
 			case 'Exit': return 'danger';
+			case 'Exited': return 'danger';
 			case 'Up': return 'success';
 			default: return 'default';
 		}
