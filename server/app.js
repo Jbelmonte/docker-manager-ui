@@ -27,6 +27,8 @@ app.use('/docker-api', docker_api);
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });*/
 
+console.log('Running with env '+app.get('env'));
+
 /**
  * Development Settings
  */
@@ -37,7 +39,7 @@ if (app.get('env') === 'development') {
     app.use(express.static(path.join(__dirname, '../client/.tmp')));
     app.use(express.static(path.join(__dirname, '../client/src')));
     app.all('*', function (req, res) {
-      res.sendFile(path.join(__dirname, '/public/index.html'));
+      res.sendFile(path.join(__dirname, '../client/src/index.html'));
     });
 
     // Error Handling

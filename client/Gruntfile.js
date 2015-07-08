@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     app: bowerConfig.appPath || 'app',
     dist: '../server/dist',
     distDocs: 'dist/docs',
-    name: bowerConfig.name || '',
+    name: bowerConfig.name || 'app',
     tmp: '.tmp'
   };
 
@@ -95,7 +95,7 @@ module.exports = function (grunt) {
                 '/docs',
                 connect.static('dist_docs')
               ),
-              connect.static(appConfig.app)
+              connect.static('<%= yeoman.app %>')
             ];
           }
         }
@@ -109,9 +109,9 @@ module.exports = function (grunt) {
               connect.static('test'),
               connect().use(
                 '/bower_components',
-                connect.static(appConfig.app+'/bower_components')
+                connect.static('<%= yeoman.app %>/bower_components')
               ),
-              connect.static(appConfig.app)
+              connect.static('<%= yeoman.app %>')
             ];
           }
         }
@@ -332,7 +332,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',          // Icons and other stuff
             '.htaccess',                // .htaccess config file
             '*.html',                   // HTML files
-            'app/{,*/}*.html',          // App partials
+            'app/**/*.html',            // App partials
             'app/{,*/}locale-*.json',   // L10n files
             'assets/img/{,*/}*.{webp}', // Non minify files
             'assets/fonts/{,*/}*.*'     // Fonts
@@ -342,15 +342,20 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.tmp %>/assets/img',
           dest: '<%= yeoman.dist %>/assets/img',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/',
+          dest: '<%= yeoman.dist %>',
+          src: ['bower_components/**/*.*']
         }]
       },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>',
-        dest: '<%= yeoman.tmp %>/assets/css/',
+        dest: '<%= yeoman.tmp %>',
         src: [
           'assets/css/{,*/}*.css',      // App CSS
-          'bower_components/**/*.css'   // CSS in Bower dependencies
+       //   'bower_components/**/*.css'   // CSS in Bower dependencies
         ]
       },
       docsjs: {
