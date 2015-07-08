@@ -201,9 +201,9 @@
 			vm.tableParams.reload();
 			
 			// Show first page
-			/*if (vm.tableParams.page() != 1) {
+			if (vm.tableParams.page() !== 1) {
 				vm.tableParams.page(1);
-			}*/
+			}
 			
 			// Return data again for nested promises.
 			return data;
