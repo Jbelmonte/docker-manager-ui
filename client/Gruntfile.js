@@ -24,6 +24,13 @@ module.exports = function (grunt) {
     name: bowerConfig.name || 'app',
     tmp: '.tmp'
   };
+  
+  var envConfig = {
+    local: grunt.file.readJSON('config/env/local.json'),
+    development: grunt.file.readJSON('config/env/development.json'),
+    testing: grunt.file.readJSON('config/env/testing.json'),
+    production: grunt.file.readJSON('config/env/production.json'),
+  };
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -39,16 +46,29 @@ module.exports = function (grunt) {
         dest: '.tmp/app/app.environment.js',
       },
       // Environment targets
+      local: { constants: envConfig.local },
+      development: { constants: envConfig.development },
+      testing: { constants: envConfig.testing },
+      production: { constants: envConfig.production }
+    },
+    preprocess: {
+      local: {
+        options: { context : envConfig.local },
+        files : { '<%= yeoman.tmp %>/index.html' : '<%= yeoman.app %>/index.html' }
+      },
       development: {
-        constants: grunt.file.readJSON('config/env/development.json')
+        options: { context : envConfig.development },
+        files : { '<%= yeoman.tmp %>/index.html' : '<%= yeoman.app %>/index.html' }
       },
       testing: {
-        constants: grunt.file.readJSON('config/env/testing.json')
+        options: { context : envConfig.testing },
+        files : { '<%= yeoman.tmp %>/index.html' : '<%= yeoman.app %>/index.html' }
       },
       production: {
-        constants: grunt.file.readJSON('config/env/production.json')
+        options: { context : envConfig.production },
+        files : { '<%= yeoman.tmp %>/index.html' : '<%= yeoman.app %>/index.html' }
       }
-    },
+    }, 
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -110,11 +130,8 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static('<%= yeoman.tmp %>'),
-              connect().use(
-                '/docs',
-                connect.static('dist_docs')
-              ),
-              connect.static('<%= yeoman.app %>')
+              connect.static('<%= yeoman.app %>'),
+              connect().use('/docs', connect.static('dist_docs'))
             ];
           }
         }
@@ -126,10 +143,10 @@ module.exports = function (grunt) {
             return [
               connect.static('<%= yeoman.tmp %>'),
               connect.static('test'),
-              connect().use(
+              /*connect().use(
                 '/bower_components',
                 connect.static('<%= yeoman.app %>/bower_components')
-              ),
+              ),*/
               connect.static('<%= yeoman.app %>')
             ];
           }
@@ -363,6 +380,11 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
+          cwd: '<%= yeoman.tmp %>',
+          dest: '<%= yeoman.dist %>',
+          src: ['index.html']
+        }, {
+          expand: true,
           cwd: '<%= yeoman.app %>/',
           dest: '<%= yeoman.dist %>',
           src: ['bower_components/**/*.*']
@@ -465,9 +487,7 @@ module.exports = function (grunt) {
         bestMatch: true,
         scripts: [
           'angular.js',
-          '../js/app/app.min.js',
-          '../js/app/app.cities.min.js',
-          '../js/app/app.widgets.min.js'
+          '../js/app/**/*.js'
         ],
         /*startPage: '/api',
         titleLink: "/api"*/
@@ -487,11 +507,12 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
     
-    target = target || 'development';
+    target = target || 'local';
 
     grunt.task.run([
       'clean:server',
       'ngconstant:'+target,
+      'preprocess:'+target,
       'wiredep',
       'concurrent:server',
       'autoprefixer',
@@ -501,9 +522,9 @@ module.exports = function (grunt) {
   });
 
   // Running environments
-  grunt.registerTask('dev', ['serve']);
-  grunt.registerTask('uat', ['serve']);
-  grunt.registerTask('pro', ['serve:dist']);
+  grunt.registerTask('dev', ['serve:development']);
+  grunt.registerTask('uat', ['serve:testing']);
+  grunt.registerTask('pro', ['serve:production']);
 
   grunt.registerTask('serve-test', [
     'clean:server',
@@ -548,28 +569,37 @@ module.exports = function (grunt) {
     'watch'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'wiredep',
-    'ngconstant:development',
-    'jshint',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('build', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
+    
+    target = target || 'local';
+
+    grunt.task.run([
+      'clean:dist',
+      'wiredep',
+      'ngconstant:'+target,
+      'preprocess:'+target,
+      'jshint',
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'concat',
+      'ngAnnotate',
+      'copy:dist',
+      'cdnify',
+      'cssmin',
+      'uglify',
+      'filerev',
+      'usemin',
+      'htmlmin'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'build'
+    'build:local'
   ]);
 };

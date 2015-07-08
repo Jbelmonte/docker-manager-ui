@@ -2,7 +2,8 @@
   "html5BaseHref": "/cloud4cities_backoffice_dev/",
   "api": {
     "apiKey": "",
-    "baseUrl": ""
+    "baseUrl": "",
+    "securityBaseUrl": ""
   },
   "ENV": {
     "name": "development",

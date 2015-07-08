@@ -1,5 +1,10 @@
 {
   "html5BaseHref": "/cloud4cities_backoffice_test/",
+  "api": {
+    "apiKey": "",
+    "baseUrl": "",
+    "securityBaseUrl": ""
+  },
   "ENV": {
     "name": "testing",
     "foo": "We are in testing!!!!!!"

@@ -6,7 +6,7 @@
     "securityBaseUrl": ""
   },
   "ENV": {
-    "name": "production",
-    "foo": "We are in production!!!!!!"
+    "name": "local",
+    "foo": "We are in local!!!!!!"
   }
 }
