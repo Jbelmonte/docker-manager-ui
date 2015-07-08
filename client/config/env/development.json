@@ -1,0 +1,11 @@
+{
+  "html5BaseHref": "/cloud4cities_backoffice_dev/",
+  "api": {
+    "apiKey": "",
+    "baseUrl": ""
+  },
+  "ENV": {
+    "name": "development",
+    "foo": "We are in development!!!!!!"
+  }
+}

@@ -33,8 +33,10 @@
 		dialogsProvider.setSize('sm');
 	}
 	
-	run.$inject = ['Restangular', 'appCommons'];	
-	function run (  Restangular,   common) {
+	run.$inject = ['Restangular', 'appCommons', 'ENV'];	
+	function run (  Restangular,   common,       ENV) {
+		common.logger.log('Detected environment config', ENV);
+		
 		// Error interceptor
 		Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
 			// Error not handler

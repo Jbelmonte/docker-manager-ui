@@ -30,6 +30,25 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+    ngconstant: {
+      options: {
+        space: '   ',
+        wrap: true,
+        name: '<%= yeoman.name %>.env.config',
+        deps: [],
+        dest: '.tmp/app/app.environment.js',
+      },
+      // Environment targets
+      development: {
+        constants: grunt.file.readJSON('config/env/development.json')
+      },
+      testing: {
+        constants: grunt.file.readJSON('config/env/testing.json')
+      },
+      production: {
+        constants: grunt.file.readJSON('config/env/production.json')
+      }
+    },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -467,9 +486,12 @@ module.exports = function (grunt) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
+    
+    target = target || 'development';
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:'+target,
       'wiredep',
       'concurrent:server',
       'autoprefixer',
@@ -529,6 +551,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'ngconstant:development',
     'jshint',
     'useminPrepare',
     'concurrent:dist',

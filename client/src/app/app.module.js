@@ -16,6 +16,7 @@
 			
 			// App modules
 			'app.core',
+			'docker-manager-ui.env.config',
 			'docker-manager-ui.common.directives',
 			'docker-manager-ui.common.filters',
 			'docker-manager-ui.containers'

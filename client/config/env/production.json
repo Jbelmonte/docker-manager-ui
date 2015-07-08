@@ -1,0 +1,7 @@
+{
+  "html5BaseHref": "/",
+  "ENV": {
+    "name": "production",
+    "foo": "We are in production!!!!!!"
+  }
+}
