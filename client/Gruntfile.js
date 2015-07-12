@@ -89,6 +89,7 @@ module.exports = function (grunt) {
       'ngconstant:'+target,
       'preprocess:'+target,
       'jshint',
+      'jscs',
       'useminPrepare',
       'concurrent:dist',
       'autoprefixer',
