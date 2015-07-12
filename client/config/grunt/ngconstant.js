@@ -1,7 +1,14 @@
-module.exports = {
-  local: {
+module.exports = function(grunt, options){
+  return {
     options: {
-      context: {
+      space: '   ',
+      wrap: true,
+      name: '<%= yeoman.name %>.env.config',
+      deps: [],
+      dest: '.tmp/app/app.environment.js'
+    },
+    local: {
+      constants: {
         html5BaseHref: '/',
         api: {
           apiKey: '',
@@ -14,13 +21,8 @@ module.exports = {
         }
       }
     },
-    files: {
-      '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-    }
-  },
-  development: {
-    options: {
-      context: {
+    development: {
+      constants: {
         html5BaseHref: '/cloud4cities_backoffice_dev/',
         api: {
           apiKey: '',
@@ -33,13 +35,8 @@ module.exports = {
         }
       }
     },
-    files: {
-      '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-    }
-  },
-  testing: {
-    options: {
-      context: {
+    testing: {
+      constants: {
         html5BaseHref: '/cloud4cities_backoffice_test/',
         api: {
           apiKey: '',
@@ -52,13 +49,8 @@ module.exports = {
         }
       }
     },
-    files: {
-      '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-    }
-  },
-  production: {
-    options: {
-      context: {
+    production: {
+      constants: {
         html5BaseHref: '/',
         api: {
           apiKey: '',
@@ -70,9 +62,6 @@ module.exports = {
           foo: 'We are in production!!!!!!'
         }
       }
-    },
-    files: {
-      '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
     }
-  }
+  };
 };
