@@ -9,57 +9,37 @@ module.exports = function(grunt, options){
     },
     local: {
       constants: {
-        html5BaseHref: '/',
-        api: {
+        $$apiConfig: {
+          baseUrl: 'http://localhost:3000/docker-api',
           apiKey: '',
-          baseUrl: '',
-          securityBaseUrl: ''
-        },
-        ENV: {
-          name: 'local',
-          foo: 'We are in local!!!!!!'
+          securityBaseUrl: 'http://localhost:3000/oauth/token'
         }
       }
     },
     development: {
       constants: {
-        html5BaseHref: '/cloud4cities_backoffice_dev/',
-        api: {
+        $$apiConfig: {
+          baseUrl: 'http://devel.host.com/docker-api',
           apiKey: '',
-          baseUrl: '',
-          securityBaseUrl: ''
-        },
-        ENV: {
-          name: 'development',
-          foo: 'We are in development!!!!!!'
+          securityBaseUrl: 'http://devel.host.com/oauth/token'
         }
       }
     },
     testing: {
       constants: {
-        html5BaseHref: '/cloud4cities_backoffice_test/',
-        api: {
+        $$apiConfig: {
+          baseUrl: 'https://test.host.com/docker-api',
           apiKey: '',
-          baseUrl: '',
-          securityBaseUrl: ''
-        },
-        ENV: {
-          name: 'testing',
-          foo: 'We are in testing!!!!!!'
+          securityBaseUrl: 'https://test.host.com/oauth/token'
         }
       }
     },
     production: {
       constants: {
-        html5BaseHref: '/',
-        api: {
+        $$apiConfig: {
+          baseUrl: 'https://host.com/docker-api',
           apiKey: '',
-          baseUrl: '',
-          securityBaseUrl: ''
-        },
-        ENV: {
-          name: 'production',
-          foo: 'We are in production!!!!!!'
+          securityBaseUrl: 'https://host.com/oauth/token'
         }
       }
     }

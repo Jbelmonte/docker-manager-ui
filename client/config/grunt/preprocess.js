@@ -3,78 +3,34 @@ module.exports = function(grunt, options){
     local: {
       options: {
         context: {
-          html5BaseHref: '/',
-          api: {
-            apiKey: '',
-            baseUrl: '',
-            securityBaseUrl: ''
-          },
-          ENV: {
-            name: 'local',
-            foo: 'We are in local!!!!!!'
-          }
+          html5BaseHref: '/'
         }
       },
-      files: {
-        '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-      }
+      files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     development: {
       options: {
         context: {
-          html5BaseHref: '/cloud4cities_backoffice_dev/',
-          api: {
-            apiKey: '',
-            baseUrl: '',
-            securityBaseUrl: ''
-          },
-          ENV: {
-            name: 'development',
-            foo: 'We are in development!!!!!!'
-          }
+          html5BaseHref: '/cloud4cities_backoffice_dev/'
         }
       },
-      files: {
-        '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-      }
+      files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     testing: {
       options: {
         context: {
-          html5BaseHref: '/cloud4cities_backoffice_test/',
-          api: {
-            apiKey: '',
-            baseUrl: '',
-            securityBaseUrl: ''
-          },
-          ENV: {
-            name: 'testing',
-            foo: 'We are in testing!!!!!!'
-          }
+          html5BaseHref: '/cloud4cities_backoffice_test/'
         }
       },
-      files: {
-        '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-      }
+      files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     production: {
       options: {
         context: {
-          html5BaseHref: '/',
-          api: {
-            apiKey: '',
-            baseUrl: '',
-            securityBaseUrl: ''
-          },
-          ENV: {
-            name: 'production',
-            foo: 'We are in production!!!!!!'
-          }
+          html5BaseHref: '/admin/'
         }
       },
-      files: {
-        '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html'
-      }
+      files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     }
   };
 };

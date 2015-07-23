@@ -6,8 +6,8 @@
       .config(config)
       .run(run);
 
-  config.$inject = ['RestangularProvider', 'dialogsProvider', '$translateProvider', '$logProvider'];
-  function config(RestangularProvider,   dialogsProvider,   $translateProvider,   $logProvider) {
+  config.$inject = ['RestangularProvider', 'dialogsProvider', '$translateProvider', '$logProvider', '$$apiConfig'];
+  function config(RestangularProvider,   dialogsProvider,   $translateProvider,   $logProvider, $$apiConfig) {
     /**
      * Configure logs
      */
@@ -17,7 +17,7 @@
      * Configure REST client
      */
     // Base URL
-    var baseUrl = 'http://localhost:3000/docker-api';
+    var baseUrl = $$apiConfig.baseUrl;// 'http://localhost:3000/docker-api';
     console.log('Configurint REST endpoints with base URL', baseUrl);
     RestangularProvider.setBaseUrl(baseUrl);
 
@@ -33,10 +33,8 @@
     dialogsProvider.setSize('sm');
   }
 
-  run.$inject = ['Restangular', 'appCommons', 'ENV'];
-  function run(Restangular,   common,       ENV) {
-    common.logger.log('Detected environment config', ENV);
-
+  run.$inject = ['Restangular', 'appCommons'];
+  function run(Restangular,   common) {
     // Error interceptor
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
       // Error not handler
