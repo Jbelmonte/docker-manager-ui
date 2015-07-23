@@ -24,22 +24,25 @@ module.exports = function (grunt) {
    * Configurable paths for the application
    */
   var bowerConfig = require('./bower.json');
+  var yeoman = {
+    app: bowerConfig.appPath || 'app',
+    dist: '../server/dist',
+    distDocs: 'dist/docs',
+    name: bowerConfig.name || 'app',
+    tmp: '.tmp'
+  };
+  var envConfig = {
+    local: grunt.file.readJSON('config/env/local.json'),
+    development: grunt.file.readJSON('config/env/development.json'),
+    testing: grunt.file.readJSON('config/env/testing.json'),
+    production: grunt.file.readJSON('config/env/production.json'),
+  };
+  
   var options = {
     configPath: path.join(process.cwd(), 'config/grunt'),
     data: {
-      yeoman: {
-        app: bowerConfig.appPath || 'app',
-        dist: '../server/dist',
-        distDocs: 'dist/docs',
-        name: bowerConfig.name || 'app',
-        tmp: '.tmp'
-      },
-      envConfig: {
-        local: grunt.file.readJSON('config/env/local.json'),
-        development: grunt.file.readJSON('config/env/development.json'),
-        testing: grunt.file.readJSON('config/env/testing.json'),
-        production: grunt.file.readJSON('config/env/production.json'),
-      }
+      yeoman: yeoman,
+      envConfig: envConfig
     }
   };
 
@@ -77,10 +80,6 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
     target = target || 'local';
 
     grunt.task.run([
