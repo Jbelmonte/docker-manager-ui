@@ -20,7 +20,6 @@ var containers = {
 				console.error('Error listing containers', err);
 				next(err);
 			} else {
-				console.log('Received containers', containers);
 				res.json(containers);
 			}
 		});
@@ -31,7 +30,6 @@ var containers = {
 				console.error('Error listing containers', err);
 				next(err);
 			} else {
-				console.log('Received containers', containers);
 				var cb = function (err, data) {
 					console.log('Stopped container', data);
 				};
