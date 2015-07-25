@@ -1,12 +1,8 @@
 {
-  "html5BaseHref": "/",
-  "api": {
+  "html5BaseHref": "/admin/",
+  "$$apiConfig": {
+    "baseUrl": "https://host.com/docker-api",
     "apiKey": "",
-    "baseUrl": "",
-    "securityBaseUrl": ""
-  },
-  "ENV": {
-    "name": "production",
-    "foo": "We are in production!!!!!!"
+    "securityBaseUrl": "https://host.com/oauth/token"
   }
 }

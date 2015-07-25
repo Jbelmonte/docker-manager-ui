@@ -1,12 +1,8 @@
 {
   "html5BaseHref": "/",
-  "api": {
+  "$$apiConfig": {
+    "baseUrl": "http://localhost:3000/docker-api",
     "apiKey": "",
-    "baseUrl": "",
-    "securityBaseUrl": ""
-  },
-  "ENV": {
-    "name": "local",
-    "foo": "We are in local!!!!!!"
+    "securityBaseUrl": "http://localhost:3000/oauth/token"
   }
 }

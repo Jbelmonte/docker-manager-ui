@@ -1,12 +1,8 @@
 {
   "html5BaseHref": "/cloud4cities_backoffice_test/",
-  "api": {
+  "$$apiConfig": {
+    "baseUrl": "https://test.host.com/docker-api",
     "apiKey": "",
-    "baseUrl": "",
-    "securityBaseUrl": ""
-  },
-  "ENV": {
-    "name": "testing",
-    "foo": "We are in testing!!!!!!"
+    "securityBaseUrl": "https://test.host.com/oauth/token"
   }
 }

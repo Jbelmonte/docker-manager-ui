@@ -1,35 +1,19 @@
 module.exports = function(grunt, options){
   return {
     local: {
-      options: {
-        context: {
-          html5BaseHref: '/'
-        }
-      },
+      options: { context: options.envConfig.local },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     development: {
-      options: {
-        context: {
-          html5BaseHref: '/cloud4cities_backoffice_dev/'
-        }
-      },
+      options: { context: options.envConfig.development },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     testing: {
-      options: {
-        context: {
-          html5BaseHref: '/cloud4cities_backoffice_test/'
-        }
-      },
+      options: { context: options.envConfig.testing },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     production: {
-      options: {
-        context: {
-          html5BaseHref: '/admin/'
-        }
-      },
+      options: { context: options.envConfig.production },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     }
   };
