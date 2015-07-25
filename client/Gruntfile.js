@@ -55,7 +55,7 @@ module.exports = function (grunt) {
   /**
    * Register tasks
    */
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server. Can use different endpoint environments: local, development, testing and production.', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -63,12 +63,12 @@ module.exports = function (grunt) {
     target = target || 'local';
 
     grunt.task.run([
-    /*  'clean:server',
+      'clean:server',
       'ngconstant:'+target,
-      'preprocess:'+target,
+      'preprocess:local',
       'wiredep',
       'concurrent:server',
-      'autoprefixer',*/
+      'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
@@ -79,7 +79,7 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('build', function (target) {
+  grunt.registerTask('build', 'Build base on different targets: local, development, testing and production.', function (target) {
     target = target || 'local';
 
     grunt.task.run([

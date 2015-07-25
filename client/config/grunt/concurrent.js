@@ -3,7 +3,8 @@ module.exports = function(grunt, options){
     server: ['copy:styles'],
     test: ['copy:styles'],
     dist: ['copy:styles', 'imagemin', 'svgmin'],
-    protractorTest: ['protractor:chrome',
+    protractorTest: [
+      'protractor:chrome',
       'protractor:safari',
       'protractor:firefox'
     ]

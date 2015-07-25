@@ -26,13 +26,15 @@ module.exports = function(grunt, options){
       options: {
         livereload: '<%= connect.options.livereload %>'
       },
-      files: ['<%= yeoman.app %>/{,*/}*.html',
+      files: [
+        '<%= yeoman.app %>/{,*/}*.html',
         '<%= yeoman.tmp %>/assets/css/{,*/}*.css',
         '<%= yeoman.app %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
       ]
     },
     e2eTest: {
-      files: ['test/e2e/{,*/}*.js',
+      files: [
+        'test/e2e/{,*/}*.js',
         '<%= yeoman.app %>/app/{,*/}*.js',
         '<%= yeoman.app %>/{,*/}*.html',
         '<%= yeoman.tmp %>/assets/css/{,*/}*.css',

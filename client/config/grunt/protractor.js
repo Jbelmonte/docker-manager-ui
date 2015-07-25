@@ -6,26 +6,8 @@ module.exports = function(grunt, options){
       noColor: false,
       args: {}
     },
-    chrome: {
-      options: {
-        args: {
-          browser: 'chrome'
-        }
-      }
-    },
-    safari: {
-      options: {
-        args: {
-          browser: 'safari'
-        }
-      }
-    },
-    firefox: {
-      options: {
-        args: {
-          browser: 'firefox'
-        }
-      }
-    }
+    chrome: { options: { args: { browser: 'chrome' } } },
+    safari: { options: { args: { browser: 'safari' } } },
+    firefox: { options: { args: { browser: 'firefox' } } }
   };
 };
