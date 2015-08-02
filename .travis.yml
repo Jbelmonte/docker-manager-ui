@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "0.12"
+  - "0.11"
+  - "0.10"
+  - "0.8"
+env:
+  - NODE_ENV=development
+before_install:
+  - npm install -g npm
+  - npm install -g nodemon
+
+#  - npm install -g codeclimate-test-reporter
+#before_script:
+#  - npm install
+#addons:
+#  code_climate:
+#    repo_token: adf08323...
+#after_script:
+#  - codeclimate-test-reporter < lcov.info
