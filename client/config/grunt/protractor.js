@@ -1,7 +1,7 @@
 module.exports = function(grunt, options){
   return {
     options: {
-      configFile: 'test/protractor.conf.js',
+      configFile: '<%= yeoman.test %>/protractor.conf.js',
       keepAlive: true,
       noColor: false,
       args: {}

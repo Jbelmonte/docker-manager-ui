@@ -12,7 +12,7 @@ module.exports = function(grunt, options){
       }
     },
     jsTest: {
-      files: ['test/spec/{,*/}*.js'],
+      files: ['<%= yeoman.test %>/spec/{,*/}*.js'],
       tasks: ['newer:jshint:test', 'karma']
     },
     styles: {
@@ -34,7 +34,7 @@ module.exports = function(grunt, options){
     },
     e2eTest: {
       files: [
-        'test/e2e/{,*/}*.js',
+        '<%= yeoman.test %>/e2e/{,*/}*.js',
         '<%= yeoman.app %>/app/{,*/}*.js',
         '<%= yeoman.app %>/{,*/}*.html',
         '<%= yeoman.tmp %>/assets/css/{,*/}*.css',

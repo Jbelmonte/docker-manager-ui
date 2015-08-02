@@ -10,7 +10,8 @@ module.exports = function(grunt, options){
       scripts: ['angular.js', '../js/app/**/*.js']
     },
     api: {
-      src: ['<%= yeoman.app %>/app/**/*.js',
+      src: [
+        '<%= yeoman.app %>/app/**/*.js',
         '!<%= yeoman.app %>/**/*.spec.js'
       ],
       title: 'App Documentation'

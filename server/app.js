@@ -36,10 +36,10 @@ if (app.get('env') === 'development') {
     // This will change in production since we'll be using the dist folder
     //app.use(express.static(path.join(__dirname, '../client')));
     // This covers serving up the index page
-    app.use(express.static(path.join(__dirname, '../client/.tmp')));
+    app.use(express.static(path.join(__dirname, '../.tmp')));
     app.use(express.static(path.join(__dirname, '../client/src')));
     app.all('*', function (req, res) {
-      res.sendFile(path.join(__dirname, '../client/src/index.html'));
+      res.sendFile(path.join(__dirname, '../.tmp/index.html'));
     });
 
     // Error Handling
@@ -56,7 +56,6 @@ if (app.get('env') === 'development') {
  * Production Settings
  */
 if (app.get('env') === 'production') {
-
     // changes it to use the optimized version for production
     app.use(express.static(path.join(__dirname, '/dist')));
 

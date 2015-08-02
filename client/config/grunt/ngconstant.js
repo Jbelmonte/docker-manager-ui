@@ -5,7 +5,7 @@ module.exports = function(grunt, options){
       wrap: true,
       name: '<%= yeoman.name %>.env.config',
       deps: [],
-      dest: '.tmp/app/app.environment.js'
+      dest: '<%= yeoman.tmp %>/app/app.environment.js'
     },
     local: { constants: options.envConfig.local },
     development: { constants: options.envConfig.development },

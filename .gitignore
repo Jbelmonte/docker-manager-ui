@@ -24,17 +24,14 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-client/node_modules
-client/src/bower_components
-client/.tmp
-client/dist
-
-server/node_modules
-server/dist
+node_modules
+bower_components
+.tmp
+dist
 
 # Debug log from npm
 npm-debug.log
 
 # OSX files
 .DS_Store
-client/.idea
+.idea

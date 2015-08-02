@@ -22,7 +22,7 @@ module.exports = function(grunt, options){
         middleware: function (connect) {
           return [
             connect.static(options.yeoman.tmp),
-            connect.static('test'),
+            connect.static(options.yeoman.test),
             /*connect().use(
               '/bower_components',
               connect.static('<%= yeoman.app %>/bower_components')

@@ -24,23 +24,40 @@ module.exports = function (grunt) {
    * Configurable paths for the application
    */
   var bowerConfig = require('./bower.json');
+  var paths = {
+    js: [
+      
+    ],
+    css: [
+      
+    ],
+    img: [
+      
+    ],
+    tests: [
+      
+    ],
+    bowerComponents: grunt.file.readJSON('.bowerrc').directory
+  };
   var yeoman = {
     app: bowerConfig.appPath || 'app',
-    dist: '../server/dist',
-    distDocs: 'dist/docs',
     name: bowerConfig.name || 'app',
+    test: 'client/test',
+    dist: 'server/dist',
+    distDocs: 'dist/docs',
     tmp: '.tmp'
   };
   var envConfig = {
-    local: grunt.file.readJSON('config/env/local.json'),
-    development: grunt.file.readJSON('config/env/development.json'),
-    testing: grunt.file.readJSON('config/env/testing.json'),
-    production: grunt.file.readJSON('config/env/production.json'),
+    local: grunt.file.readJSON('client/config/env/local.json'),
+    development: grunt.file.readJSON('client/config/env/development.json'),
+    testing: grunt.file.readJSON('client/config/env/testing.json'),
+    production: grunt.file.readJSON('client/config/env/production.json'),
   };
   
   var options = {
-    configPath: path.join(process.cwd(), 'config/grunt'),
+    configPath: path.join(process.cwd(), 'client/config/grunt'),
     data: {
+      paths: paths,
       yeoman: yeoman,
       envConfig: envConfig
     }
