@@ -5,10 +5,13 @@
 ### Module
 
 [![Build Status](https://travis-ci.org/Jbelmonte/docker-manager-ui.svg)](https://travis-ci.org/Jbelmonte/docker-manager-ui)
+[![Coverage](https://coveralls.io/repos/Jbelmonte/docker-manager-ui/badge.svg?branch=master&service=github)](https://coveralls.io/github/Jbelmonte/docker-manager-ui)
 
 ### Dependencies
 
-### Code quality
+[![Dependency Status](https://david-dm.org/jbelmonte/docker-manager-ui.svg)](https://david-dm.org/jbelmonte/docker-manager-ui)
+[![devDependency Status](https://david-dm.org/jbelmonte/docker-manager-ui/dev-status.svg)](https://david-dm.org/jbelmonte/docker-manager-ui#info=devDependencies)
+
 
 
 ## Stack

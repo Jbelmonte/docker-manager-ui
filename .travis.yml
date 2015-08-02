@@ -1,9 +1,6 @@
 language: node_js
 node_js:
   - "0.12"
-#  - "0.11"
-#  - "0.10"
-#  - "0.8"
 env:
   - NODE_ENV=development
 before_install:
@@ -20,3 +17,7 @@ before_script:
 #    repo_token: adf08323...
 #after_script:
 #  - codeclimate-test-reporter < lcov.info
+notifications:
+  email:
+    on_succes: always
+    on_failure: always

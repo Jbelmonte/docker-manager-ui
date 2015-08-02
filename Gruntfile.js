@@ -137,7 +137,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+  //  'karma'
   ]);
 
   // End to end (browser)
