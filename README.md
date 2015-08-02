@@ -1,5 +1,16 @@
 # docker-manager-ui
 
+## Badge mania
+
+### Module
+
+[![Build Status](https://travis-ci.org/Jbelmonte/docker-manager-ui.svg)](https://travis-ci.org/Jbelmonte/docker-manager-ui)
+
+### Dependencies
+
+### Code quality
+
+
 ## Stack
 
 Web application based on a RESTful API and a HTML web client.
