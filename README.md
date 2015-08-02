@@ -5,7 +5,8 @@
 ### Module
 
 [![Build Status](https://travis-ci.org/Jbelmonte/docker-manager-ui.svg)](https://travis-ci.org/Jbelmonte/docker-manager-ui)
-[![Coverage](https://coveralls.io/repos/Jbelmonte/docker-manager-ui/badge.svg?branch=master&service=github)](https://coveralls.io/github/Jbelmonte/docker-manager-ui)
+[![Coverage Status](https://coveralls.io/repos/Jbelmonte/docker-manager-ui/badge.svg?branch=master&service=github)](https://coveralls.io/github/Jbelmonte/docker-manager-ui?branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 ### Dependencies
 
