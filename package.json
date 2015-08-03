@@ -22,7 +22,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "grunt build; NODE_ENV=development DOCKER_HOST=tcp://192.168.59.103:2376 DOCKER_CERT_PATH=/Users/juanbelmonterodriguez/.boot2docker/certs/boot2docker-vm DOCKER_TLS_VERIFY=1 nodemon ./server/bin/www",
+    "start": "grunt build && NODE_ENV=development DOCKER_HOST=tcp://192.168.59.103:2376 DOCKER_CERT_PATH=/Users/juanbelmonterodriguez/.boot2docker/certs/boot2docker-vm DOCKER_TLS_VERIFY=1 nodemon ./server/bin/www",
     "test": "grunt test"
   },
   "dependencies": {
