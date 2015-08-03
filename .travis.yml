@@ -14,7 +14,8 @@ before_script:
 #addons:
 #  code_climate:
 #    repo_token: adf08323...
-#after_script:
+after_script:
+  - istanbul cover jasmine-node --captureExceptions client/test/spec/ && cat ./reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./reports/coverage
 #  - codeclimate-test-reporter < client/test/coverage/lcov.info
 notifications:
   email:

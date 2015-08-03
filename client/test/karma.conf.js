@@ -78,11 +78,12 @@ module.exports = function(config) {
       'coverage'
     ],
     preprocessors: {
-      "src/app/**/*.js": "coverage"
+      'src/app/**/*.js': 'coverage'
     },
     coverageReporter: {
-      type: "lcov",
-      dir: "test/coverage/"
+      type: 'lcov',
+      dir: '../reports',
+      subdir: 'coverage'
     },
 
     // Continuous Integration mode
