@@ -5,7 +5,7 @@
   "description": "Yet another Docker package manager UI.",
   "homepage": "https://github.com/Jbelmonte/docker-manager-ui/",
   "author": "Juan Belmonte <juanbeldev@gmail.com>",
-  "contributors": [ ],
+  "contributors": [],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -53,6 +53,7 @@
     "grunt-google-cdn": "^0.4.3",
     "grunt-jscs": "^1.8.0",
     "grunt-karma": "^0.11.2",
+    "grunt-karma-coveralls": "^2.5.3",
     "grunt-newer": "^0.7.0",
     "grunt-ng-annotate": "^0.4.0",
     "grunt-ng-constant": "^1.1.0",
@@ -64,12 +65,13 @@
     "jasmine-core": "^2.3.4",
     "jsdoc": "^3.3.2",
     "jshint-stylish": "^0.2.0",
+    "karma": "^0.12.37",
+    "karma-coverage": "^0.4.2",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.0",
     "load-grunt-config": "^0.17.2",
     "load-grunt-tasks": "^0.4.0",
     "phantomjs": "^1.9.17",
-    "time-grunt": "^0.3.1",
-    "karma": "^0.12.37",
-    "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.2.0"
+    "time-grunt": "^0.3.1"
   }
 }

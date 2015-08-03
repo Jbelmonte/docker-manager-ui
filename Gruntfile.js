@@ -134,10 +134,12 @@ module.exports = function (grunt) {
   // Unit testing
   grunt.registerTask('test', [
     'clean:server',
+    'ngconstant:local',
+    'preprocess:local',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-  //  'karma'
+    'karma'
   ]);
 
   // End to end (browser)

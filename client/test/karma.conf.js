@@ -18,21 +18,29 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/bower_components/angular/angular.js',
-      'src/bower_components/angular-mocks/angular-mocks.js',
-      'src/bower_components/angular-animate/angular-animate.js',
-      'src/bower_components/angular-cookies/angular-cookies.js',
-      'src/bower_components/angular-resource/angular-resource.js',
-      'src/bower_components/angular-route/angular-route.js',
-      'src/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'src/bower_components/angular-sanitize/angular-sanitize.js',
-      'src/bower_components/angular-touch/angular-touch.js',
-      'src/bower_components/angular-translate/angular-translate.js',
-      'src/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',
-      'src/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
-      'src/app/app.module.js', // Define module first to avoid '$injector:nomod' error
-      //'src/app/cities/cities.module.js', // Define module first to avoid '$injector:nomod' error
+	    'src/bower_components/jquery/dist/jquery.js',
+	    'src/bower_components/bootstrap/dist/js/bootstrap.js',
+	    'src/bower_components/angular/angular.js',
+	    'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+	    'src/bower_components/ui-router/release/angular-ui-router.js',
+	    'src/bower_components/lodash/lodash.js',
+	    'src/bower_components/restangular/dist/restangular.js',
+	    'src/bower_components/moment/moment.js',
+	    'src/bower_components/angular-moment/angular-moment.js',
+	    'src/bower_components/ng-table/dist/ng-table.min.js',
+	    'src/bower_components/angular-animate/angular-animate.js',
+	    'src/bower_components/angular-toastr/dist/angular-toastr.tpls.js',
+	    'src/bower_components/angular-sanitize/angular-sanitize.js',
+	    'src/bower_components/angular-translate/angular-translate.js',
+	    'src/bower_components/angular-dialog-service/dist/dialogs.min.js',
+	    'src/bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js',
+	    'src/bower_components/Chart.js/Chart.js',
+	    'src/bower_components/angular-chart.js/dist/angular-chart.js',
+	    'src/bower_components/angular-mocks/angular-mocks.js',
+      'src/app/app.module.js',
+      'src/app/**/*.module.js',
       'src/app/**/*.js',
+      '../.tmp/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -57,10 +65,24 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
+      'karma-coverage',
       'karma-jasmine',
       'karma-phantomjs-launcher',
 //      'karma-chrome-launcher'
     ],
+    
+    // A list of reporters to use.
+    reporters: [
+      'progress',
+      'coverage'
+    ],
+    preprocessors: {
+      "**/lib/*js": "coverage"
+    },
+    coverageReporter: {
+      type: "lcov",
+      dir: "coverage/"
+    },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
