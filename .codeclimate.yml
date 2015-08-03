@@ -1,0 +1,6 @@
+languages:
+  JavaScript: true
+exclude_paths:
+- "client/bower_components"
+- "client/config"
+- "server"

@@ -8,15 +8,14 @@ before_install:
   - npm install -g nodemon
   - npm install -g grunt-cli
   - npm install -g bower
-#  - npm install -g codeclimate-test-reporter
+  - npm install -g codeclimate-test-reporter
 before_script:
   - bower install
-#  - grunt build
 #addons:
 #  code_climate:
 #    repo_token: adf08323...
 #after_script:
-#  - codeclimate-test-reporter < lcov.info
+#  - codeclimate-test-reporter < client/test/coverage/lcov.info
 notifications:
   email:
     on_succes: always
