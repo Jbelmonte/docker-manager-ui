@@ -49,8 +49,9 @@ module.exports = function (grunt) {
   };
   var envConfig = {
     local: grunt.file.readJSON('client/config/env/local.json'),
+    test: grunt.file.readJSON('client/config/env/test.json'),
     development: grunt.file.readJSON('client/config/env/development.json'),
-    testing: grunt.file.readJSON('client/config/env/testing.json'),
+    staging: grunt.file.readJSON('client/config/env/staging.json'),
     production: grunt.file.readJSON('client/config/env/production.json'),
   };
   
@@ -72,7 +73,7 @@ module.exports = function (grunt) {
   /**
    * Register tasks
    */
-  grunt.registerTask('serve', 'Compile then start a connect web server. Can use different endpoint environments: local, development, testing and production.', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server. Can use different endpoint environments: local, development, staging and production.', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -96,7 +97,7 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('build', 'Build base on different targets: local, development, testing and production.', function (target) {
+  grunt.registerTask('build', 'Build base on different targets: local, development, staging and production.', function (target) {
     target = target || 'local';
 
     grunt.task.run([
@@ -134,8 +135,8 @@ module.exports = function (grunt) {
   // Unit testing
   grunt.registerTask('test', [
     'clean:server',
-    'ngconstant:local',
-    'preprocess:local',
+    'ngconstant:test',
+    'preprocess:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -185,6 +186,6 @@ module.exports = function (grunt) {
    * Useful shortcuts.
    */
   grunt.registerTask('dev', ['serve:development']);
-  grunt.registerTask('uat', ['serve:testing']);
+  grunt.registerTask('uat', ['serve:staging']);
   grunt.registerTask('pro', ['serve:production']);
 };

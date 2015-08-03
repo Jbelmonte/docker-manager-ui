@@ -8,8 +8,9 @@ module.exports = function(grunt, options){
       dest: '<%= yeoman.tmp %>/app/app.environment.js'
     },
     local: { constants: options.envConfig.local },
+    test: { constants: options.envConfig.test },
     development: { constants: options.envConfig.development },
-    testing: { constants: options.envConfig.testing },
+    staging: { constants: options.envConfig.staging },
     production: { constants: options.envConfig.production }
   };
 };

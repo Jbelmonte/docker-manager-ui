@@ -4,12 +4,16 @@ module.exports = function(grunt, options){
       options: { context: options.envConfig.local },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
+    test: {
+      options: { context: options.envConfig.test },
+      files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
+    },
     development: {
       options: { context: options.envConfig.development },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
-    testing: {
-      options: { context: options.envConfig.testing },
+    staging: {
+      options: { context: options.envConfig.staging },
       files: { '<%= yeoman.tmp %>/index.html': '<%= yeoman.app %>/index.html' }
     },
     production: {
