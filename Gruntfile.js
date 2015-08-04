@@ -44,7 +44,7 @@ module.exports = function (grunt) {
     name: bowerConfig.name || 'app',
     test: 'client/test',
     dist: 'server/dist',
-    distDocs: 'dist/docs',
+    distDocs: 'reports/docs',
     tmp: '.tmp'
   };
   var envConfig = {
