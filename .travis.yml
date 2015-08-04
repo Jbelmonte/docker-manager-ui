@@ -1,3 +1,11 @@
+# Container-based architecture
+sudo: false
+# Speed up build by caching dependencies
+# http://blog.travis-ci.com/2013-12-05-speed-up-your-builds-cache-your-dependencies/
+cache:
+  directories:
+    - node_modules
+
 language: node_js
 node_js:
   - "0.12"
@@ -11,9 +19,6 @@ before_install:
   - npm install -g codeclimate-test-reporter
 before_script:
   - bower install
-#addons:
-#  code_climate:
-#    repo_token: adf08323...
 after_script:
   - codeclimate-test-reporter < ./reports/coverage/lcov.info
   - ./node_modules/coveralls/bin/coveralls.js < ./reports/coverage/lcov.info
