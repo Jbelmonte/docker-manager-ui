@@ -8,7 +8,7 @@
 [![Dependency Status](https://david-dm.org/jbelmonte/docker-manager-ui.svg)](https://david-dm.org/jbelmonte/docker-manager-ui)
 [![devDependency Status](https://david-dm.org/jbelmonte/docker-manager-ui/dev-status.svg)](https://david-dm.org/jbelmonte/docker-manager-ui#info=devDependencies)
 
-
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 ## Stack
 
