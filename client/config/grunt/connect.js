@@ -8,28 +8,20 @@ module.exports = function(grunt, options){
     livereload: {
       options: {
         open: true,
-        middleware: function middleware (connect) {
-          return [
-            connect.static(options.yeoman.tmp),
-            connect.static(options.yeoman.app)
-          ];
-        }
+        base: [
+          options.yeoman.tmp,
+          options.yeoman.app
+        ]
       }
     },
     test: {
       options: {
         port: 9001,
-        middleware: function (connect) {
-          return [
-            connect.static(options.yeoman.tmp),
-            connect.static(options.yeoman.test),
-            /*connect().use(
-              '/bower_components',
-              connect.static('<%= yeoman.app %>/bower_components')
-            ),*/
-            connect.static(options.yeoman.app)
-          ];
-        }
+        base: [
+          options.yeoman.tmp,
+          options.yeoman.test,
+          options.yeoman.app
+        ]
       }
     },
     dist: {

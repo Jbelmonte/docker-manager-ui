@@ -2,7 +2,7 @@ module.exports = function(grunt, options){
   return {
     options: {
       jshintrc: '.jshintrc',
-      reporter: 'node_modules/jshint-stylish/stylish.js'
+      reporter: require('jshint-stylish')
     },
     all: {
       src: ['Gruntfile.js', '<%= yeoman.app %>/app/{,*/}*.js']
