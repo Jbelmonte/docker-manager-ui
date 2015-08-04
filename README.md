@@ -1,16 +1,9 @@
 # Docker Manager UI
 
-## Badge mania
-
-### Module
-
 [![Build Status](https://travis-ci.org/Jbelmonte/docker-manager-ui.svg)](https://travis-ci.org/Jbelmonte/docker-manager-ui)
 [![Coverage Status](https://coveralls.io/repos/Jbelmonte/docker-manager-ui/badge.svg?branch=master&service=github)](https://coveralls.io/github/Jbelmonte/docker-manager-ui?branch=master)
-[![Test Coverage](https://codeclimate.com/github/Jbelmonte/docker-manager-ui/badges/coverage.svg)](https://codeclimate.com/github/Jbelmonte/docker-manager-ui/coverage)
 [![Code Climate](https://codeclimate.com/github/Jbelmonte/docker-manager-ui/badges/gpa.svg)](https://codeclimate.com/github/Jbelmonte/docker-manager-ui)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
-
-### Dependencies
 
 [![Dependency Status](https://david-dm.org/jbelmonte/docker-manager-ui.svg)](https://david-dm.org/jbelmonte/docker-manager-ui)
 [![devDependency Status](https://david-dm.org/jbelmonte/docker-manager-ui/dev-status.svg)](https://david-dm.org/jbelmonte/docker-manager-ui#info=devDependencies)
