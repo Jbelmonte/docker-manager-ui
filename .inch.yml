@@ -1,0 +1,6 @@
+files:
+  included:
+    - client/src/app/**/*.js
+    - server/**/*.js
+  excluded:
+    - server/config/**/*.js
